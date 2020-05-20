@@ -9,10 +9,18 @@ pipeline {
           }
         }
 
-        stage('Declarative') {
+        stage('build') {
           steps {
             sh 'mvn -Dmaven.test.failure.ignore=true clean package'
+          }
+        }
+        stage('archive') {
+          steps {
             archiveArtifacts 'target/*.jar'
+          }
+        }
+        stage('test') {
+          steps {
             junit '**/target/surefire-reports/TEST-*.xml'
           }
         }
