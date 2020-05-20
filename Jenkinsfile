@@ -14,6 +14,8 @@ pipeline {
             sh 'mvn -Dmaven.test.failure.ignore=true clean package'
           }
         }
+      }
+      
         stage('archive') {
           steps {
             archiveArtifacts 'target/*.jar'
@@ -25,7 +27,6 @@ pipeline {
           }
         }
 
-      }
     }
 
   }
